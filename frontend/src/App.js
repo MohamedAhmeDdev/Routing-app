@@ -7,11 +7,17 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import About from './component/About';
 import Services from './component/Services';
 import Home from './component/Home';
+import Blog from './component/Blog';
+import Contactss from './component/Contactss';
+import Login from './component/Login';
+import Signup from './component/Signup';
 
 
 function App() {
   const [Content , setContent] = useState();
   const [users , setUsers] = useState([]);
+  const [openModal, setOpenModal] = useState(false)
+  const [openModalSignup, setOpenModalSignup] = useState(false)
 
   useEffect(() => {
     getContent()
@@ -46,11 +52,17 @@ function App() {
     <div>
       
       <BrowserRouter>
-      <Navbar/>
+      <Navbar setOpenModal={setOpenModal} setOpenModalSignup={setOpenModalSignup}/>
+      {openModal && <Login closeModal={setOpenModal}/>}
+      {openModalSignup  && <Signup closeModalSignup={setOpenModalSignup}/>}
       <Routes>
       <Route  path='/' element={<Home/>} />
         <Route  path='/About' element={<About/>} />
         <Route  path='/Services' element={<Services/>} />
+        <Route  path='/Contactss' element={<Contactss/>} />
+        <Route  path='/Blog' element={<Blog/>} />
+        <Route  path='/Login' element={<Login/>} />
+        <Route  path='/SignUp' element={<Signup/>} />
       </Routes>
       </BrowserRouter>
       <p>{Content}</p>

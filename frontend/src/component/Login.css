@@ -1,0 +1,10 @@
+.modal-app{
+    width: 100vw;
+    height: 100vh;
+    top: 10px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+}
+

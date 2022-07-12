@@ -4,6 +4,9 @@
   position: relative;
   left: 250px;
 }
-.navbar-nav .nav-item:hover{
-  border-bottom: 1px solid black;
+ .nav-link:hover{
+  background-color: blueviolet;
+}
+.login{
+  width: 100px;
 }
