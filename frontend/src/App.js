@@ -1,6 +1,6 @@
-import React, {useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import './App.css'
-import axios from "axios"
+// import axios from "axios"
 import Navbar from './component/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -11,49 +11,53 @@ import Blog from './component/Blog';
 import Contactss from './component/Contactss';
 import Login from './component/Login';
 import Signup from './component/Signup';
+import { ModuleloginContext } from './context/ModuleLoginContext';
 
 
-function App() {
-  const [Content , setContent] = useState();
-  const [users , setUsers] = useState([]);
-  const [openModal, setOpenModal] = useState(false)
+function App() { 
+  const [openModal,setOpenModal ] = useState(false)
   const [openModalSignup, setOpenModalSignup] = useState(false)
 
-  useEffect(() => {
-    getContent()
-  }, [])
+ // const [Content , setContent] = useState();
+  // const [users , setUsers] = useState([]);
+  // useEffect(() => {
+  //   getContent()
+  // }, [])
 
-  useEffect(() => {
-    getUser()
-  }, [])
+  // useEffect(() => {
+  //   getUser()
+  // }, [])
 
-  const getContent = async () => {
-    const response = await axios.get('http://localhost:8000/');
-   setContent(response.data)
-  }
+  // const getContent = async () => {
+  //   const response = await axios.get('http://localhost:8000/');
+  //  setContent(response.data)
+  // }
 
-  const getUser = async () => {
-    const response = await axios.get('http://localhost:8000/users');
-   setUsers(response.data)
-  }
+  // const getUser = async () => {
+  //   const response = await axios.get('http://localhost:8000/users');
+  //  setUsers(response.data)
+  // }
 
-  const table = users.map (item  => {
-    return(
-     <tbody key={item.id}>
-       <tr>
-      <td>{item.id}</td>
-      <td>{item.Name}</td>
-      </tr>
-     </tbody>
-    )
-  })
+  // const table = users.map (item  => {
+  //   return(
+  //    <tbody key={item.id}>
+  //      <tr>
+  //     <td>{item.id}</td>
+  //     <td>{item.Name}</td>
+  //     </tr>
+  //    </tbody>
+  //   )
+  // })
 
   return (
     <div>
       
       <BrowserRouter>
       <Navbar setOpenModal={setOpenModal} setOpenModalSignup={setOpenModalSignup}/>
-      {openModal && <Login closeModal={setOpenModal}/>}
+      <ModuleloginContext.Provider value={{setOpenModal}}>
+         {openModal && <Login />}
+      </ModuleloginContext.Provider>
+     
       {openModalSignup  && <Signup closeModalSignup={setOpenModalSignup}/>}
       <Routes>
       <Route  path='/' element={<Home/>} />
@@ -65,10 +69,6 @@ function App() {
         <Route  path='/SignUp' element={<Signup/>} />
       </Routes>
       </BrowserRouter>
-      <p>{Content}</p>
-      <table>
-      {table}
-      </table>
     </div>
   )
 }

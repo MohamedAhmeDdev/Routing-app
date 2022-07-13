@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ModuleloginContext } from '../context/ModuleLoginContext'
 import './Login.css'
 
-function Login({closeModal , setOpenModalSignup}) {
+function Login() {
+   const {setOpenModal} = useContext(ModuleloginContext)
+
   return (
-   
     <div className='container'>
     <div className='modal-app'>
     <div className="modal-dialog">
         <div className="modal-content">
         <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">Login</h5>
-            <button type="button" onClick={() => closeModal(false)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" onClick={() =>setOpenModal(false)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div className="modal-body">
         <form>
@@ -26,8 +28,8 @@ function Login({closeModal , setOpenModalSignup}) {
     </form>
         </div>
         <div className="modal-footer">
-            <button type="button" onClick={() => closeModal(false)} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button"  onClick={() => {setOpenModalSignup(true)}} className="btn btn-primary">Signup</button>
+            <button type="button" onClick={() => setOpenModal(false)} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" className="btn btn-primary">Signup</button>
         </div>
         </div>
     </div>
