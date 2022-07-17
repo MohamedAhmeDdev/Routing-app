@@ -21,7 +21,6 @@ const Blog = () => {
  
     return (
         <div>
-            <Link to="/add" className="button is-primary mt-2">Add New</Link>
             <table className="table is-striped is-fullwidth">
                 <thead>
                     <tr>
