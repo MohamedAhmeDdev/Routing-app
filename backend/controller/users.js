@@ -1,21 +1,19 @@
-import users from "../models/usersModels.js"
+import users from "../module/userModule.js";
 
-
-export const getAllUsers = async(req,res) => {
-    try{
-        const users = await users.findAll();
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await Product.findAll();
         res.json(users);
-    }catch(error){
+    } catch (error) {
         res.json({ message: error.message });
-    }
+    }  
 }
-
+ 
 
 export const createUsers = async (req, res) => {
     try {
         await users.create(req.body);
         res.json({
-            "message": "Users Created"
         });
     } catch (error) {
         res.json({ message: error.message });
