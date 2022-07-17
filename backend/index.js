@@ -48,7 +48,6 @@
 import express from "express";
 import db from "./config/database.js";
 import usersRoutes from "./routes/app.js";
-
 import cors from "cors";
  
 const app = express();
