@@ -14,7 +14,7 @@ export const getUsersById = async (req, res) => {
     try {
         const user = await user.findAll({
             where: {
-                id: req.params.id
+                id: req.params.id 
             }
         });
         res.json(user[0]);

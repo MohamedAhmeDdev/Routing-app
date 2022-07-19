@@ -12,7 +12,7 @@ function Signup({closeModalSignup}) {
         const [error, setError] = useState(false)
         const navigate = useNavigate();
      
-        const saveUser = async (e) => {
+        const signUp = async (e) => {
             e.preventDefault();
             await axios.post('http://localhost:5000/users',{
                 userName: userName,
@@ -24,57 +24,52 @@ function Signup({closeModalSignup}) {
 
         const validation = (e) => {
             e.preventDefault();
-            if(userName.length==0 || userName.length<= 10)
+            if(userName.length===0 || userName.length<= 10)
             setError(true)
 
-            if(userEmail.length==0)
+            if(userEmail.length===0)
             setError(true)
 
-            if(password.length==0 || password.length<= 5)
+            if(password.length===0 || password.length<= 5)
             setError(true)
-        }
+         }
     
   return (
     <div className='container'>
-    <div className='modal-app'>
-    <div className="modal-dialog">
-        <div className="modal-content">
-        <div className="modal-header">
-            <h5 className="modal-title" id="exampleModalLabel">SignUp</h5>
-            <button type="button" onClick={() => closeModalSignup(false)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className='modal-app'>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                   <h5 className="modal-title" id="exampleModalLabel">SignUp</h5>
+                   <button type="button" onClick={() => closeModalSignup(false)} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div className="modal-body">
+                 <form onSubmit={signUp}>
+
+                            <label htmlFor="exampleInputName" className="form-label">User Name</label>
+                            <input type="text" className="form-control" id="exampleInputName" value={userName}   onChange={ (e) => setUserName(e.target.value) } />
+                            {error&&userName.length<=10? <p className='error'>userName can't be Empty or less than 10 xracter </p>:""}
+
+                            <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
+                            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userEmail}  onChange={ (e) => setUserEmail(e.target.value) }/>
+                            {error&&userEmail.length<=10? <p className='error'>useremail can't be Empty</p>:""}
+
+                            <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
+                            <input type="password" className="form-control" id="exampleInputPassword1" value={password}  onChange={ (e) => setPassword(e.target.value) }/>
+                            {error&&password.length<=10? <p className='error'>password can't be Empty or less than 5 digits </p>:""}
+
+                        <button type="submit" onClick={validation}  className="btn btn-primary">Submit</button>
+                 </form>
+            </div>
+
+                <div className="modal-footer">
+                <button type="button" onClick={() => closeModalSignup(false)} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+               </div>
+            </div>
         </div>
-
-        <div className="modal-body">
-        <form onSubmit={saveUser}>
-    <div className="mb-3">
-        <label htmlFor="exampleInputName" className="form-label">User Name</label>
-        <input type="text" className="form-control" id="exampleInputName" value={userName}   onChange={ (e) => setUserName(e.target.value) } />
-        {error&&userName.length<=10? <p className='error'>userName can't be Empty or less than 10 xracter </p>:""}
-    </div>
-
-    <div className="mb-3">
-        <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userEmail}  onChange={ (e) => setUserEmail(e.target.value) }/>
-        {error&&userEmail.length<=10? <p className='error'>useremail can't be Empty</p>:""}
-    </div>
-
-    <div className="mb-3">
-        <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-        <input type="password" className="form-control" id="exampleInputPassword1" value={password}  onChange={ (e) => setPassword(e.target.value) }/>
-        {error&&password.length<=10? <p className='error'>password can't be Empty or less than 5 digits </p>:""}
-    </div>
-
-    <button type="submit" onClick={validation}  className="btn btn-primary">Submit</button>
-    </form>
-        </div>
-
-        <div className="modal-footer">
-            <button type="button" onClick={() => closeModalSignup(false)} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-        </div>
-    </div>
-    </div>
-</div>
+     </div>
+   </div>
   )
 }
 
