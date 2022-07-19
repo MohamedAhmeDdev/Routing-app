@@ -21,3 +21,20 @@ export const createLogin = async (req, res) => {
         res.json({ message: error.message });
     }  
 }
+
+
+export const deleteLogin = async (req, res) => {
+    try {
+        await login.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+        res.json({
+            "message": "login Deleted"
+        });
+    } catch (error) {
+        res.json({ message: error.message });
+    }  
+}
+ 
