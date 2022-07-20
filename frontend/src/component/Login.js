@@ -13,10 +13,12 @@ function Login() {
 
     const login = async (e) => {
         e.preventDefault();
-        await axios.post('http://localhost:5000/login',{
-            userEmail: userEmail,
-            password: password
-        });
+       if( await axios.post('http://localhost:5000/login',{
+        userEmail: userEmail,
+        password: password
+    })){
+        setOpenModal(false)
+    };
         navigate("/");
     }
 
