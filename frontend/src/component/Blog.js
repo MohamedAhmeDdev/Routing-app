@@ -27,6 +27,7 @@ const Blog = () => {
                         <th>No</th>
                         <th>userName</th>
                         <th>userEmail</th>
+                        <th>password</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -36,6 +37,7 @@ const Blog = () => {
                             <td>{ index + 1 }</td>
                             <td>{ user.userName }</td>
                             <td>{ user.userEmail }</td>
+                            <td>{ user.password }</td>
                             <td>
                                 <Link to={`/edit/${user.id}`} className="button is-small is-info">Edit</Link>
                                 <button onClick={ () => deleteUsers(user.id) } className="button is-small is-danger">Delete</button>

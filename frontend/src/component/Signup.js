@@ -14,25 +14,21 @@ function Signup({closeModalSignup}) {
      
         const signUp = async (e) => {
             e.preventDefault();
-            await axios.post('http://localhost:5000/users',{
+            if(userName.length===0 || userName.length<= 10 && userEmail.length===0 && password.length===0 || password.length<= 5){
+              setError(true)
+            }
+            else if(
+              await axios.post('http://localhost:5000/users',{
                 userName: userName,
                 userEmail: userEmail,
                 password: password
-            });
+            }) ) {
+              closeModalSignup(false)
+            }
             navigate("/");
         }
-
-        const validation = (e) => {
-            e.preventDefault();
-            if(userName.length===0 || userName.length<= 10)
-            setError(true)
-
-            if(userEmail.length===0)
-            setError(true)
-
-            if(password.length===0 || password.length<= 5)
-            setError(true)
-         }
+   
+         
     
   return (
     <div className='container'>
@@ -59,7 +55,7 @@ function Signup({closeModalSignup}) {
                             <input type="password" className="form-control" id="exampleInputPassword1" value={password}  onChange={ (e) => setPassword(e.target.value) }/>
                             {error&&password.length<=10? <p className='error'>password can't be Empty or less than 5 digits </p>:""}
 
-                        <button type="submit" onClick={validation}  className="btn btn-primary">Submit</button>
+                        <button type="submit"  className="btn btn-primary">Submit</button>
                  </form>
             </div>
 
