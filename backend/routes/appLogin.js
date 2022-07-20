@@ -1,15 +1,11 @@
 import express from "express"; 
 import { 
-    getAllLogin,
-    createLogin,
-    deleteLogin,
+    verifyUser
 } from "../controller/Log.js";
  
 const router = express.Router();
  
-router.get('/', getAllLogin);
-router.post('/', createLogin);
-router.delete('/:id', deleteLogin); 
+router.post('/', verifyUser);
 
 export default router;
 

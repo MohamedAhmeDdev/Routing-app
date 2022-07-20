@@ -1,26 +1,35 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
-import  { useNavigate } from 'react-router-dom';
 import { ModuleloginContext } from '../context/ModuleLoginContext'
 import './Login.css'
 
 function Login() {
     const { setOpenModal } = useContext(ModuleloginContext)
     const[userEmail, setUserEmail] = useState('');
-    const[password, setPassword] = useState('')
-    const navigate = useNavigate();
+    const[password, setPassword] = useState('');
+
 
 
     const login = async (e) => {
         e.preventDefault();
-       if( await axios.post('http://localhost:5000/login',{
+       try {
+       const response = await axios.post('http://localhost:5000/login',{
         userEmail: userEmail,
-        password: password
-    })){
-        setOpenModal(false)
-    };
-        navigate("/");
+        password: password})
+        console.log(response?.data);
+        
+       } catch (error) {
+       
+        if (error.response?.status === 401) {
+            console.log("not user");
+        } else if(error.response?.status === 400){
+            console.log("not not accepte user");
+          
+        }
+       }
     }
+
+
 
     return (
         <div className='container'>
@@ -35,7 +44,7 @@ function Login() {
                             <form onSubmit={login}>                          
                                     <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                                     <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
-                                
+
                                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                                      <input type="password" className="form-control" id="exampleInputPassword1" value={password}  onChange={ (e) => setPassword(e.target.value) }/>
 
