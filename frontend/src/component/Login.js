@@ -7,6 +7,7 @@ function Login() {
     const { setOpenModal } = useContext(ModuleloginContext)
     const[userEmail, setUserEmail] = useState('');
     const[password, setPassword] = useState('');
+    const[error, setError] = useState(false);
 
 
 
@@ -21,9 +22,12 @@ function Login() {
        } catch (error) {
        
         if (error.response?.status === 401) {
-            console.log("not user");
-        } else if(error.response?.status === 400){
-            console.log("not not accepte user");
+            // console.log("not user");
+            setError(true)
+        } 
+        else if(error.response?.status === 400){
+            // console.log("not not accepte user");
+            setError(true)
           
         }
        }
@@ -47,13 +51,13 @@ function Login() {
 
                                     <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                                      <input type="password" className="form-control" id="exampleInputPassword1" value={password}  onChange={ (e) => setPassword(e.target.value) }/>
-
+                                       {error && <p className='error'>username or password DON'T match </p>}
                                 <button type="submit" className="btn btn-primary">Login</button>
                             </form>
                         </div>
+                        
                         <div className="modal-footer">
                             <button type="button" onClick={() => setOpenModal(false)} className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary">Signup</button>
                         </div>
                     </div>
                 </div>

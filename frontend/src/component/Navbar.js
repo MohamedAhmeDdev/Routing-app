@@ -25,13 +25,9 @@ function Navbar({setOpenModal , setOpenModalSignup}) {
         </li>
 
       </ul>
-      <button type="button"  onClick={() => {setOpenModal(true)}} className="btn btn-primary login">Login</button>
-      <button type="button"  onClick={() => {setOpenModalSignup(true)}} className="btn btn-primary login">SignUp</button>
-
-      <form className="d-flex">   
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      
+      <button type="button"  onClick={() => {setOpenModal(true)}} className="btn btn-primary login mx-2">Login</button>
+      <button type="button"  onClick={() => {setOpenModalSignup(true)}} className="btn btn-primary login mx-2">SignUp</button>
 
     </div>
   </div>
