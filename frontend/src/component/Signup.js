@@ -14,6 +14,7 @@ function Signup({closeModalSignup}) {
      
         const signUp = async (e) => {
             e.preventDefault();
+           try {
             if(userName.length===0 || userName.length<= 10 && userEmail.length===0 && password.length===0 || password.length<= 5){
               setError(true)
             }
@@ -25,6 +26,13 @@ function Signup({closeModalSignup}) {
             }) ) {
               closeModalSignup(false)
             }
+            
+           } catch (error) {
+            if (error.response?.status === 401) {
+              alert("Email already exists");
+             
+          } 
+           }
             navigate("/");
         }
    
@@ -41,7 +49,7 @@ function Signup({closeModalSignup}) {
             </div>
 
             <div className="modal-body">
-                 <form onSubmit={signUp}>
+                  <form onSubmit={signUp}>
 
                             <label htmlFor="exampleInputName" className="form-label">User Name</label>
                             <input type="text" className="form-control" id="exampleInputName" value={userName}   onChange={ (e) => setUserName(e.target.value) } />
@@ -57,6 +65,7 @@ function Signup({closeModalSignup}) {
 
                         <button type="submit"  className="btn btn-primary">Submit</button>
                  </form>
+                
             </div>
 
                 <div className="modal-footer">

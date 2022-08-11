@@ -16,5 +16,6 @@ const user = db.define('users',{
 },{
     freezeTableName: true
 });
- 
+
+
 export default user;
